@@ -63,13 +63,12 @@ public class TestBase {
             extentLogger.fail(result.getThrowable());
 
         }
-//        extentLogger= report.createTest(result.getName(),"Negative and Positive Scenarios");
+
        Thread.sleep(3000);
         Driver.closeDriver();
     }
     @AfterTest
     public void afterTest(){
-//        Driver.closeDriver();
         //Closing the report report.flush();
         report.flush();
     }
