@@ -61,8 +61,8 @@ public class Login extends TestBase {
 
         int rowNum=ws.getLastRowNum();
 
-        Object[][] data=new Object[rowNum][2];
-        for(int i=1;i<rowNum;i++) {
+        Object[][] data=new Object[rowNum-1][2];
+        for(int i=0;i<rowNum-1;i++) {
             for (int j = 0; j < 2; j++) {
                 Cell cell = ws.getRow(i).getCell(j);
                 if (cell != null) {
