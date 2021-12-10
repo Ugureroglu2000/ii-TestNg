@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ii" verbose="2">
+    <test name="Navigation Test">
+        <classes>
+            <class name="testng.tests.NavigationTests">
+                <methods>
+                   <include name="verifyServices"/>
+                    <include name="verifyPensions"/>
+                    <include name="verifyInvestments"/>
+                </methods>
+            </class>
+
+        </classes>
+
+
+    </test>
+
+
+</suite>

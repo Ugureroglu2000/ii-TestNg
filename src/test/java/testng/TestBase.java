@@ -9,10 +9,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
+import testng.pages.HomePage;
+import testng.utils.BrowserUtils;
 import testng.utils.ConfigurationReader;
 import testng.utils.Driver;
 
@@ -28,24 +27,27 @@ public class TestBase {
     protected static ExtentReports report;
     protected static ExtentHtmlReporter htmlReporter;
     protected static ExtentTest extentLogger;
+
     @BeforeTest
     public void beforeTest(){
         // Reports setup
         report = new ExtentReports();
         htmlReporter=new ExtentHtmlReporter(System.getProperty("user.dir")+"/test-output/Screenshots/AAreport.html");
         report.attachReporter(htmlReporter);
-        htmlReporter.config().setReportName("SpidexWM Login");
+        htmlReporter.config().setReportName("ii-TestNG");
         report.setSystemInfo("Environment","QA");
         report.setSystemInfo("Browser", ConfigurationReader.get("browser"));
 
     }
-    @BeforeMethod
-    public void beforeMethod(){
+    String url= ConfigurationReader.get("url");
+    @BeforeClass
+    public void beforeClass(){
         driver= Driver.get();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait=new WebDriverWait(driver,10);
-
+        driver.get(url);
+        BrowserUtils.clickSafely(new HomePage().acceptCookiesButton);
     }
 
     @AfterMethod
@@ -64,7 +66,10 @@ public class TestBase {
 
         }
 
-       Thread.sleep(3000);
+    }
+    @AfterClass
+    public void afterClass(){
+
         Driver.closeDriver();
     }
     @AfterTest
